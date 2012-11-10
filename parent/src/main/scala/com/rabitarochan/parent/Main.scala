@@ -1,14 +1,14 @@
 package com.rabitarochan.parent
 
 import java.util.Iterator
+import java.util.ServiceLoader
 import scala.collection.JavaConversions._
-import sun.misc.Service
+
 
 object Main extends App {
-  val services = Service.providers(classOf[PrintTrait]).asInstanceOf[Iterator[PrintTrait]]
+  val loader = ServiceLoader.load(classOf[PrintTrait])
 
   val message = "Hello world"
 
-  services.foreach(p => p.print(message))
-
+  loader.foreach(p => p.print(message))
 }
